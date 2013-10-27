@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>About Us</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="css/themes/life.css" />
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />	
+    <link rel="stylesheet" type="text/css" href="css/bshop.css">
+	
+ <script type="text/javascript" charset="utf-8" src="js/cordova-2.0.0.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.2.1.js"></script>
+
+</head> <body>
+    <script>
+        function onSuccess(data, status)
+        {
+            data = $.trim(data);
+            $("#notification").text(data);
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#submit").click(function(){
+  
+                var formData = $("#callAjaxForm").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://kdemail.comxa.com/callajax.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess,
+                    error: onError
+                });
+  
+                return false;
+            });
+        });
+    </script>
+  
+    <!-- call ajax page -->
+    <div data-role="page" id="callAjaxPage">
+        <div data-role="header">
+            <h1>Call Ajax</h1>
+        </div>
+  
+        <div data-role="content">
+            <form id="callAjaxForm">
+                <div data-role="fieldcontain">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" value=""  />
+ 
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" value=""  />
+					<label for="lastName">Email</label>
+                    <input type="text" name="email" id="lastName" value=""  />
+					<label for="lastName">Telephone Number</label>
+                    <input type="text" name="telephone" id="lastName" value=""  />
+					<label for="lastName">Comments</label>
+                    <input type="text" name="message" id="lastName" value=""  />
+                    <h3 id="notification"></h3>
+                    <button data-theme="b" id="submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+  
+        <div data-role="footer">
+            <h1>GiantFlyingSaucer</h1>
+        </div>
+    </div>
+</body>
+</html>
